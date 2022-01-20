@@ -19,7 +19,7 @@ public class ProjetDto {
 	
 	@Size(min=1)
 	private List<Long> productIds;
-
+private List<Long>tutorialIds;
 	public String getName() {
 		return name;
 	}
@@ -42,6 +42,14 @@ public class ProjetDto {
 
 	public void setProductIds(List<Long> productIds) {
 		this.productIds = productIds;
+	}
+
+	public List<Long> getTutorialIds() {
+		return tutorialIds;
+	}
+
+	public void setTutorialIds(List<Long> tutorialIds) {
+		this.tutorialIds = tutorialIds;
 	}
 
 }
