@@ -25,7 +25,7 @@ public class Projet {
 	private String name;
 
 	@DecimalMin(value = "0.0", inclusive = false)
-	@Digits(integer = 3, fraction = 2)
+	@Digits(integer = 5, fraction = 2)
 	private Float budget;
 	// many to many avec l'entité product @MantToMany
 	@ManyToMany
@@ -61,6 +61,22 @@ public class Projet {
 
 	public void setBudget(Float budget) {
 		this.budget = budget;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public List<Tutorial> getTutorials() {
+		return tutorials;
+	}
+
+	public void setTutorials(List<Tutorial> tutorials) {
+		this.tutorials = tutorials;
 	}
 
 }
