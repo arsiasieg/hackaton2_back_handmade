@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.controller;
+package com.handmade.hackatontwo.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.handmade.hackatonTwo.dto.CategoryDto;
+import com.handmade.hackatontwo.dto.CategoryDto;
 
-import com.handmade.hackatonTwo.model.Category;
+import com.handmade.hackatontwo.model.Category;
 
-import com.handmade.hackatonTwo.repository.CategoryRepository;
+import com.handmade.hackatontwo.repository.CategoryRepository;
 
 @RestController
 @RequestMapping("/categories")

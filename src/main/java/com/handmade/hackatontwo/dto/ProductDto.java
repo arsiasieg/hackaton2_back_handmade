@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.dto;
+package com.handmade.hackatontwo.dto;
 
 import javax.persistence.Basic;
 import javax.persistence.FetchType;

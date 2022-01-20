@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.dto;
+package com.handmade.hackatontwo.dto;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;

@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.controller;
+package com.handmade.hackatontwo.controller;
 
 
 
@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.handmade.hackatonTwo.dto.ProductDto;
-import com.handmade.hackatonTwo.model.Product;
-import com.handmade.hackatonTwo.repository.ProductRepository;
+import com.handmade.hackatontwo.dto.ProductDto;
+import com.handmade.hackatontwo.model.Product;
+import com.handmade.hackatontwo.repository.ProductRepository;
 
 
 @RestController

@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.dto;
+package com.handmade.hackatontwo.dto;
 
 public class CategoryDto {
 	private Long id;

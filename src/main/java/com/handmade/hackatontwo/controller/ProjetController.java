@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.controller;
+package com.handmade.hackatontwo.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.handmade.hackatonTwo.dto.ProjetDto;
-import com.handmade.hackatonTwo.model.Projet;
-import com.handmade.hackatonTwo.repository.ProjetRepository;
+import com.handmade.hackatontwo.dto.ProjetDto;
+import com.handmade.hackatontwo.model.Projet;
+import com.handmade.hackatontwo.repository.ProjetRepository;
 
 @RestController
 @RequestMapping("/projets")

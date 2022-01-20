@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo.model;
+package com.handmade.hackatontwo.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
