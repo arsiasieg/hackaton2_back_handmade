@@ -1,5 +1,8 @@
 package com.handmade.hackatontwo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,38 +10,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 public class Tutorial {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
-	@Size(min=2, max=100)
+	@Size(min = 2, max = 100)
 	private String title;
-	
-	
+
 	@Min(value = 0)
 	private Long difficulty;
-	
+
 	@NotBlank
-	@Size(min=2, max=255)
-	private String image;
-	
+	@Size(min = 2, max = 255)
+	private String image;	
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY )
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+
 	
-	// Getters and Setters
-	
-	
+
+	@ManyToMany(mappedBy = "tutorials")
+	private List<Projet> projets = new ArrayList<>();
+
+	public List<Projet> getProjets() {
+		return projets;
+	}
+
 	public Long getId() {
 		return id;
 	}
