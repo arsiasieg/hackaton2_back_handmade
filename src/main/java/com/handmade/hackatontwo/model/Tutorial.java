@@ -13,14 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 
-
-
-
-
-
-
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,14 +24,14 @@ public class Tutorial {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	
 	@Size(min = 2, max = 100)
 	private String title;
 
 	@Min(value = 0)
 	private Long difficulty;
 
-	@NotBlank
+	
 	@Size(min = 2, max = 255)
 	private String image;	
 
@@ -50,23 +44,12 @@ public class Tutorial {
 		return projets;
 	}
 	
-
-	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY )
+	@ManyToOne(optional = true, fetch = FetchType.LAZY )
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-
-	
-
-
-	
-
 	// Getters and Setters
 	
-	
-
-
 	public Long getId() {
 		return id;
 	}

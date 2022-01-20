@@ -10,13 +10,15 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
-	@Size(min = 2, max = 100)
+	
+	//@Size(min = 2, max = 100)
 	
 	@OneToMany(mappedBy = "category")
 	private List<Tutorial> tutorials;
@@ -26,6 +28,7 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy="category")
+	@JsonIgnore
 	private List<Product> products;
 	
 	public Long getId() {

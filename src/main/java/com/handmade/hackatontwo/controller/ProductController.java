@@ -1,8 +1,5 @@
 package com.handmade.hackatontwo.controller;
 
-
-
-
 import java.util.List;
 
 import java.util.Optional;
@@ -23,89 +20,91 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.handmade.hackatontwo.dto.ProductDto;
+import com.handmade.hackatontwo.model.Category;
 import com.handmade.hackatontwo.model.Product;
+import com.handmade.hackatontwo.repository.CategoryRepository;
 import com.handmade.hackatontwo.repository.ProductRepository;
-
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
-	
+	@Autowired
+	CategoryRepository categoryRepository;
 
 	// Create
 	@PostMapping
 	public Product create(@Valid @RequestBody ProductDto productDto) {
-		
-		//creation liste de categories qu'on veut associée au nouveau produit. 
-		//List<Category> categories = new ArrayList<>();
-		
-		//pour chaque ID categorie envoyé dans la productDto
-		//for (Long categoryId : productDto.getcategoryId()) {
-			
-			//on verifie si la categorie est existante
-			
-			//Optional<Category> optCategory = categoryRepository.findById(categoryId);
-			//if (optCategory.isPresent()) {
-				
-				//si existanteon la place dans la liste de cat' associé au product
-				//categories.add(optCategory.get());
-			//}else {
-			//	throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			//}
-		
+		Optional<Category> optCategory = categoryRepository.findById(productDto.getCategory_id());
+
+		// creation liste de categories qu'on veut associée au nouveau produit.
+		// List<Category> categories = new ArrayList<>();
+
+		// pour chaque ID categorie envoyé dans la productDto
+		// for (Long categoryId : productDto.getcategoryId()) {
+
+		// on verifie si la categorie est existante
+
+		// Optional<Category> optCategory = categoryRepository.findById(categoryId);
+		if (optCategory.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+			// si existanteon la place dans la liste de cat' associé au product
+
+		}
+
 		Product product = new Product();
 		product.setName(productDto.getName());
 		product.setPrice(productDto.getPrice());
 		product.setImage(productDto.getImage());
 		product.setIsBy(productDto.getIsBy());
+		product.setCategory(optCategory.get());
 
-			return productRepository.save(product);
+		return productRepository.save(product);
 	}
-	
-	// Get one 
-		@GetMapping("/{id}")
-		public Product get(@PathVariable (required = true) Long id) {
-			Optional<Product> optProduct = productRepository.findById(id);
-			if(optProduct.isPresent()) {
-				return optProduct.get();
-			}
+
+	// Get one
+	@GetMapping("/{id}")
+	public Product get(@PathVariable(required = true) Long id) {
+		Optional<Product> optProduct = productRepository.findById(id);
+		if (optProduct.isPresent()) {
+			return optProduct.get();
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+
+	}
+
+	// Get all
+	@GetMapping
+	public List<Product> getProducts() {
+		return productRepository.findAll();
+
+	}
+
+	// Update
+	@PutMapping("/{id}")
+	public Product update(@PathVariable(required = true) Long id, @Valid @RequestBody ProductDto productDto) {
+		Optional<Product> optProduct = productRepository.findById(id);
+		if (optProduct.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
-			
 		}
-		
-		// Get all
-		@GetMapping
-		public List<Product> getProducts() {
-			return productRepository.findAll();
-			
+		Product product = optProduct.get();
+		product.setName(productDto.getName());
+		product.setPrice(productDto.getPrice());
+		product.setImage(productDto.getImage());
+		product.setIsBy(productDto.getIsBy());
+		return productRepository.save(product);
+
+	}
+
+	// Delete one
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable(required = true) long id) {
+		Boolean exist = productRepository.existsById(id);
+		if (!exist) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
-		// Update
-		@PutMapping("/{id}")
-		public Product update(@PathVariable (required = true) Long id, @Valid @RequestBody ProductDto productDto ) {
-			Optional<Product> optProduct = productRepository.findById(id);
-			if(optProduct.isEmpty()) {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
-			}
-			Product product = optProduct.get();
-			product.setName(productDto.getName());
-			product.setPrice(productDto.getPrice());
-			product.setImage(productDto.getImage());
-			product.setIsBy(productDto.getIsBy());
-				return productRepository.save(product);
-			
-		}
-		
-		//Delete one
-		@DeleteMapping("/{id}")
-		public ResponseEntity<?> delete(@PathVariable (required = true) long id) {
-			Boolean exist = productRepository.existsById(id);
-			if(!exist) {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			}
-			productRepository.deleteById(id);
-				return new ResponseEntity<>(HttpStatus.OK);
-		}
+		productRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }

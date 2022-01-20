@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
@@ -25,7 +24,7 @@ public class Product {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
+	
 	@Size(min=2, max = 255)
 	private String name;
 	
