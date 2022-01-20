@@ -27,7 +27,7 @@ public class Product {
 	@Digits(integer=3, fraction=2)
 	private Float price;
 	
-	@Lob
+
     @Basic(fetch=FetchType.LAZY)
 	private String image;
 	
