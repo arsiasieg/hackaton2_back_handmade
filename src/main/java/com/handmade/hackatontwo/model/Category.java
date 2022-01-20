@@ -18,19 +18,25 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+<<<<<<< HEAD
 	//@Size(min = 2, max = 100)
+=======
+	@NotBlank
+	@Size(min = 2, max = 100)
+	private String name;
+>>>>>>> 1c6522e64c039a2ebb258fe64d3dff3fef6ad3e9
 	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private List<Tutorial> tutorials;
 	
-	// getters setters
-
-	private String name;
-
+	@JsonIgnore
 	@OneToMany(mappedBy="category")
 	@JsonIgnore
 	private List<Product> products;
 	
+		// getters setters
 	public Long getId() {
 		return id;
 	}

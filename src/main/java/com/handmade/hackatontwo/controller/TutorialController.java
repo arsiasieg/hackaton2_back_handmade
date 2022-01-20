@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.handmade.hackatontwo.dto.TutorialDto;
+import com.handmade.hackatontwo.model.Category;
 import com.handmade.hackatontwo.model.Tutorial;
+import com.handmade.hackatontwo.repository.CategoryRepository;
 import com.handmade.hackatontwo.repository.TutorialRepository;
 
 @RestController
@@ -28,15 +30,26 @@ public class TutorialController {
 	@Autowired
 	TutorialRepository tutorialRepository;
 	
+	@Autowired
+	CategoryRepository categoryRepository;
+	
 	
 	// Create
 	
 	@PostMapping
 	public Tutorial create(@Valid @RequestBody TutorialDto tutorialDto ) {
+		
+		Optional<Category> optCategory = categoryRepository.findById(tutorialDto.getIdCategory());
+		if(optCategory.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}
+		
+		
 		Tutorial tutorial = new Tutorial();
 		tutorial.setDifficulty(tutorialDto.getDifficulty());
 		tutorial.setImage(tutorialDto.getImage());
 		tutorial.setTitle(tutorialDto.getTitle());	
+		tutorial.setCategory(optCategory.get());
 		
 		return tutorialRepository.save(tutorial);
 	}

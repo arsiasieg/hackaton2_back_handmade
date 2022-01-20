@@ -17,6 +17,9 @@ import javax.validation.constraints.Min;
 
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Tutorial {
 
@@ -36,7 +39,7 @@ public class Tutorial {
 	private String image;	
 
 	
-
+	@JsonIgnore
 	@ManyToMany(mappedBy = "tutorials")
 	private List<Projet> projets = new ArrayList<>();
 
