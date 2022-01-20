@@ -22,7 +22,7 @@ import com.handmade.hackatonTwo.model.Projet;
 import com.handmade.hackatonTwo.repository.ProjetRepository;
 
 @RestController
-@RequestMapping
+@RequestMapping("/projets")
 public class ProjetController {
 	@Autowired
 	ProjetRepository projetRepository;
