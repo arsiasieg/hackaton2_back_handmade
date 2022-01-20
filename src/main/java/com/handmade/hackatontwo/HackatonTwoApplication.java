@@ -1,4 +1,4 @@
-package com.handmade.hackatonTwo;
+package com.handmade.hackatontwo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
