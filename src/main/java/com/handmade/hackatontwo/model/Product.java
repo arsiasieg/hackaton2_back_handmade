@@ -16,8 +16,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 
 @Entity
@@ -40,9 +38,7 @@ public class Product {
 	private String image;
 	
 	private Boolean isBy;
-	
 	@ManyToMany(mappedBy = "products")
-	@JsonIgnore
 	private List<Projet> projets;
 
 	public List<Projet> getProjets() {
