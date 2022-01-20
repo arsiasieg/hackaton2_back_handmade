@@ -6,7 +6,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -27,12 +29,15 @@ public class Product {
 	@Digits(integer=3, fraction=2)
 	private Float price;
 	
-	@Lob
+
     @Basic(fetch=FetchType.LAZY)
 	private String image;
 	
 	private Boolean isBy;
 
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name="category_id")
+	private Category category;
 	
 	public Long getId() {
 		return id;
@@ -72,6 +77,14 @@ public class Product {
 
 	public void setIsBy(Boolean isBy) {
 		this.isBy = isBy;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	
