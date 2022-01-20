@@ -1,9 +1,15 @@
 package com.handmade.hackatontwo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -17,10 +23,20 @@ public class Projet {
 	@NotBlank
 	@Size(min = 2, max = 100)
 	private String name;
-	
+
 	@DecimalMin(value = "0.0", inclusive = false)
 	@Digits(integer = 3, fraction = 2)
 	private Float budget;
+	// many to many avec l'entité product @MantToMany
+	@ManyToMany
+	@JoinTable(name = "projet_product", joinColumns = @JoinColumn(name = "projet_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+	private List<Product> products;
+
+	// many to many avec l(entité tutorials
+	@ManyToMany
+	@JoinTable(name = "projet_tutorial", joinColumns = @JoinColumn(name = "projet_id"), inverseJoinColumns = @JoinColumn(name = "tutorials_id"))
+	private List<Tutorial> tutorials = new ArrayList<>();
+
 	// getteers setters
 
 	public Long getId() {
