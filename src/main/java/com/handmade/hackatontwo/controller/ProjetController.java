@@ -21,17 +21,21 @@ import org.springframework.web.server.ResponseStatusException;
 import com.handmade.hackatontwo.dto.ProjetDto;
 import com.handmade.hackatontwo.model.Product;
 import com.handmade.hackatontwo.model.Projet;
+import com.handmade.hackatontwo.model.Tutorial;
 import com.handmade.hackatontwo.repository.ProductRepository;
 import com.handmade.hackatontwo.repository.ProjetRepository;
+import com.handmade.hackatontwo.repository.TutorialRepository;
 
 @RestController
 @RequestMapping("/projets")
 public class ProjetController {
 	@Autowired
 	ProjetRepository projetRepository;
-	
+
 	@Autowired
 	ProductRepository productRepository;
+	@Autowired
+	TutorialRepository tutorialRepository;
 
 	@GetMapping
 	public List<Projet> getProjets() {
@@ -59,19 +63,28 @@ public class ProjetController {
 	@PostMapping
 	public Projet createProjet(@Valid @RequestBody ProjetDto projetDto) {
 		List<Product> products = new ArrayList<>();
-		
-		for(Long productId : projetDto.getProductIds()) {
-			Product product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		for (Long productId : projetDto.getProductIds()) {
+			Product product = productRepository.findById(productId)
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 			products.add(product);
 		}
-		
-		
+
+		List<Tutorial> tutorials = new ArrayList<>();
+
+		for (Long tutorialId : projetDto.getTutorialIds()) {
+			Tutorial tutorial = tutorialRepository.findById(tutorialId)
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+			tutorials.add(tutorial);
+		}
 		Projet projet = new Projet();
 		projet.setName(projetDto.getName());
 		projet.setBudget(projetDto.getBudget());
 		projet.setProducts(products);
-
+		projet.setTutorials(tutorials);
 		return projetRepository.save(projet);
+		// many to many tutorials
+
 	}
 
 	// Update

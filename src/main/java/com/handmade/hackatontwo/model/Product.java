@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 
 import javax.persistence.ManyToMany;
 
@@ -19,8 +18,6 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -44,9 +41,7 @@ public class Product {
 	private String image;
 	
 	private Boolean isBy;
-	
 	@ManyToMany(mappedBy = "products")
-	@JsonIgnore
 	private List<Projet> projets;
 
 	public List<Projet> getProjets() {
