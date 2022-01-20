@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.handmade.hackatonTwo.dto.CategoryDto;
-import com.handmade.hackatonTwo.dto.ProjetDto;
+
 import com.handmade.hackatonTwo.model.Category;
-import com.handmade.hackatonTwo.model.Projet;
+
 import com.handmade.hackatonTwo.repository.CategoryRepository;
 
 @RestController
-@RequestMapping
+@RequestMapping("/categories")
 public class CategoryController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
 	@GetMapping
-	public List<Category> getCategories() {
+	public  List<Category> getCategories() {
 		return categoryRepository.findAll();
 	}
 
