@@ -28,7 +28,7 @@ import com.handmade.hackatonTwo.repository.ProductRepository;
 
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
