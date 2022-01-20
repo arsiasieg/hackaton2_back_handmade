@@ -24,13 +24,13 @@ import com.handmade.hackatonTwo.model.Category;
 import com.handmade.hackatonTwo.repository.CategoryRepository;
 
 @RestController
-@RequestMapping
+@RequestMapping("/categories")
 public class CategoryController {
 	@Autowired
 	CategoryRepository categoryRepository;
 
 	@GetMapping
-	public List<Category> getCategories() {
+	public  List<Category> getCategories() {
 		return categoryRepository.findAll();
 	}
 
