@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.handmade.hackatonTwo.dto.ProductDto;
@@ -25,7 +27,8 @@ import com.handmade.hackatonTwo.model.Product;
 import com.handmade.hackatonTwo.repository.ProductRepository;
 
 
-
+@RestController
+@RequestMapping("/product")
 public class ProductController {
 	@Autowired
 	ProductRepository productRepository;
@@ -105,7 +108,4 @@ public class ProductController {
 			productRepository.deleteById(id);
 				return new ResponseEntity<>(HttpStatus.OK);
 		}
-	
-	
-	
 }
