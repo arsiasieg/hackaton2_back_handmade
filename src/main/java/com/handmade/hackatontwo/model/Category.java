@@ -17,6 +17,10 @@ public class Category {
 	private Long id;
 	@NotBlank
 	@Size(min = 2, max = 100)
+	
+	@OneToMany(mappedBy = "category")
+	private List<Tutorial> tutorials;
+	
 	// getters setters
 
 	private String name;
@@ -40,12 +44,21 @@ public class Category {
 		this.name = name;
 	}
 
+
 	public List<Product> getProducts() {
 		return products;
 	}
 
 	public void setProducts(List<Product> products) {
-		this.products = products;
+		this.products = products;}
+
+	public List<Tutorial> getTutorials() {
+		return tutorials;
+	}
+
+	public void setTutorials(List<Tutorial> tutorials) {
+		this.tutorials = tutorials;
+
 	}
 
 }
