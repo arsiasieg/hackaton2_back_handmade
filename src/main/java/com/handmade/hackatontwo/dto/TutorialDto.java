@@ -11,9 +11,8 @@ public class TutorialDto {
 	@Size(min=2, max=100)
 	private String title;
 	
-	@NotBlank
 	@Min(value = 0)
-	private Integer difficulty;
+	private Long difficulty;
 	
 	@NotBlank
 	@Size(min=2, max=255)
@@ -27,11 +26,11 @@ public class TutorialDto {
 		this.title = title;
 	}
 
-	public Integer getDifficulty() {
+	public Long getDifficulty() {
 		return difficulty;
 	}
 
-	public void setDifficulty(Integer difficulty) {
+	public void setDifficulty(Long difficulty) {
 		this.difficulty = difficulty;
 	}
 

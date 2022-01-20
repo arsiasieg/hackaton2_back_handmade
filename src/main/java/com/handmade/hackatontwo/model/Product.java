@@ -23,7 +23,7 @@ public class Product {
 	@Size(min=2, max = 255)
 	private String name;
 	
-	@DecimalMin(value = "O.0", inclusive = false)
+	@DecimalMin(value = "0.0", inclusive = false)
 	@Digits(integer=3, fraction=2)
 	private Float price;
 	
