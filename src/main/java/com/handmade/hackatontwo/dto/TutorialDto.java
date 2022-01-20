@@ -17,6 +17,9 @@ public class TutorialDto {
 	@NotBlank
 	@Size(min=2, max=255)
 	private String image;
+	
+
+	private Long idCategory;
 
 	public String getTitle() {
 		return title;
@@ -40,5 +43,13 @@ public class TutorialDto {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Long getIdCategory() {
+		return idCategory;
+	}
+
+	public void setIdCategory(Long idCategory) {
+		this.idCategory = idCategory;
 	}
 }
