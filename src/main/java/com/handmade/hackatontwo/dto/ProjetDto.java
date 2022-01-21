@@ -17,9 +17,13 @@ public class ProjetDto {
 	private Float budget;
 	// getters setters
 	
+	private Boolean isFinished;
+	
 	@Size(min=1)
 	private List<Long> productIds;
-private List<Long>tutorialIds;
+	
+	private List<Long> tutorialIds;
+
 	public String getName() {
 		return name;
 	}
@@ -50,6 +54,14 @@ private List<Long>tutorialIds;
 
 	public void setTutorialIds(List<Long> tutorialIds) {
 		this.tutorialIds = tutorialIds;
+	}
+
+	public Boolean getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(Boolean isFinished) {
+		this.isFinished = isFinished;
 	}
 
 }

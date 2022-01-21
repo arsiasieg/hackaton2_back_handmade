@@ -27,6 +27,9 @@ public class Projet {
 	@DecimalMin(value = "0.0", inclusive = false)
 	@Digits(integer = 5, fraction = 2)
 	private Float budget;
+	
+	private Boolean isFinished;
+	
 	// many to many avec l'entité product @MantToMany
 	@ManyToMany
 	@JoinTable(name = "projet_product", joinColumns = @JoinColumn(name = "projet_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
@@ -34,7 +37,7 @@ public class Projet {
 
 	// many to many avec l(entité tutorials
 	@ManyToMany
-	@JoinTable(name = "projet_tutorial", joinColumns = @JoinColumn(name = "projet_id"), inverseJoinColumns = @JoinColumn(name = "tutorials_id"))
+	@JoinTable(name = "projet_tutorial", joinColumns = @JoinColumn(name = "projet_id"), inverseJoinColumns = @JoinColumn(name = "tutorial_id"))
 	private List<Tutorial> tutorials = new ArrayList<>();
 
 	// getteers setters
@@ -78,5 +81,14 @@ public class Projet {
 	public void setTutorials(List<Tutorial> tutorials) {
 		this.tutorials = tutorials;
 	}
+
+	public Boolean getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(Boolean isFinished) {
+		this.isFinished = isFinished;
+	}
+	
 
 }

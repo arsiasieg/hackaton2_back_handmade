@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import com.handmade.hackatontwo.repository.TutorialRepository;
 
 @RestController
 @RequestMapping("/projets")
+@CrossOrigin
 public class ProjetController {
 	@Autowired
 	ProjetRepository projetRepository;
@@ -58,6 +60,17 @@ public class ProjetController {
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 	}
+	
+	//Add product to project
+	@GetMapping("/{id}/products/{idProduct}")
+	public Projet addProductToProject(@PathVariable(required = true) Long id, @PathVariable(required = true) Long idProduct){
+		Projet projet = projetRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		Product product = productRepository.findById(idProduct).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		
+		projet.getProducts().add(product);
+		return projetRepository.save(projet);
+		//A TESTER !
+	}
 
 	// Create projet
 	@PostMapping
@@ -80,6 +93,7 @@ public class ProjetController {
 		Projet projet = new Projet();
 		projet.setName(projetDto.getName());
 		projet.setBudget(projetDto.getBudget());
+		projet.setIsFinished(projetDto.getIsFinished());
 		projet.setProducts(products);
 		projet.setTutorials(tutorials);
 		return projetRepository.save(projet);
@@ -91,7 +105,24 @@ public class ProjetController {
 
 	@PutMapping("/{id}")
 	public Projet updateProjet(@PathVariable(required = true) Long id, @Valid @RequestBody ProjetDto projetDto) {
-
+		List<Product> products = new ArrayList<>();
+		List<Tutorial> tutorials = new ArrayList<>();
+		
+		if(projetDto.getProductIds() != null) {
+			for(Long productId : projetDto.getProductIds()) {
+				Product product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+				products.add(product);
+			}
+		}
+		
+		if(projetDto.getTutorialIds() != null) {
+			for(Long tutorialId : projetDto.getTutorialIds()) {
+				Tutorial tutorial = tutorialRepository.findById(tutorialId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+				tutorials.add(tutorial);
+			}
+		}
+		
+		
 		Optional<Projet> optProjet = projetRepository.findById(id);
 		// Si mon objet optionnel ne contient pas d'article, je renvoi une erreur
 		if (optProjet.isEmpty()) {
@@ -101,6 +132,8 @@ public class ProjetController {
 		Projet projet = optProjet.get();
 		projet.setName(projetDto.getName());
 		projet.setBudget(projetDto.getBudget());
+		projet.setProducts(products);
+		projet.setTutorials(tutorials);
 
 		// on enregistre l'entité enregistrée en DB
 		return projetRepository.save(projet);

@@ -15,6 +15,8 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -38,6 +40,7 @@ public class Product {
 	
 	private Boolean isBy;
 	@ManyToMany(mappedBy = "products")
+	@JsonIgnore
 	private List<Projet> projets;
 
 	public List<Projet> getProjets() {
